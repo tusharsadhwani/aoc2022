@@ -15,14 +15,18 @@ def compute(s: str) -> int:
 
     score = 0
     for line in lines:
-        other, you = line.split()
+        opponent, you = line.split()
 
         if you == 'X':
-            score += 1 + ['B', 'C', 'A'].index(other)
+            # Opponent plays  Rock Paper Scissors
+            # To Lose, play:   P    R    S
+            score += 0 + 1 + ['B', 'C', 'A'].index(opponent)
         elif you == 'Y':
-            score += 3 + 1 + ['A', 'B', 'C'].index(other)
+            # To Draw, play:   R    P    S
+            score += 3 + 1 + ['A', 'B', 'C'].index(opponent)
         elif you == 'Z':
-            score += 6 + 1 + ['C', 'A', 'B'].index(other)
+            # To Win, play:    S    R    P
+            score += 6 + 1 + ['C', 'A', 'B'].index(opponent)
         else:
             raise AssertionError(you)
 

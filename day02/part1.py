@@ -15,14 +15,20 @@ def compute(s: str) -> int:
 
     score = 0
     for line in lines:
-        other, you = line.split()
+        opponent, you = line.split()
+        # You get 1 for Rock, 2 for Paper, 3 for Scissors
         score += 1 + ['X', 'Y', 'Z'].index(you)
+
         if you == 'X':
-            score += 3 * ['B', 'A', 'C'].index(other)
+            # You will    Lose Draw Win
+            # Rock:        P    R    S
+            score += 3 * ['B', 'A', 'C'].index(opponent)
         elif you == 'Y':
-            score += 3 * ['C', 'B', 'A'].index(other)
+            # Paper:       S    P    R
+            score += 3 * ['C', 'B', 'A'].index(opponent)
         elif you == 'Z':
-            score += 3 * ['A', 'C', 'B'].index(other)
+            # Scissors:    R    S    P
+            score += 3 * ['A', 'C', 'B'].index(opponent)
         else:
             raise AssertionError(you)
 
