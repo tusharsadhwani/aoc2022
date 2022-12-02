@@ -11,21 +11,31 @@ INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
 
 
 def compute(s: str) -> int:
-    numbers = support.parse_numbers_split(s)
-    for n in numbers:
-        pass
-
     lines = s.splitlines()
+
+    score = 0
     for line in lines:
-        pass
-    # TODO: implement solution here!
-    return 0
+        other, you = line.split()
+
+        if you == 'X':
+            score += 1 + ['B', 'C', 'A'].index(other)
+        elif you == 'Y':
+            score += 3 + 1 + ['A', 'B', 'C'].index(other)
+        elif you == 'Z':
+            score += 6 + 1 + ['C', 'A', 'B'].index(other)
+        else:
+            raise AssertionError(you)
+
+
+    return score
 
 
 INPUT_S = '''\
-
+A Y
+B X
+C Z
 '''
-EXPECTED = 0
+EXPECTED = 12
 
 
 @pytest.mark.parametrize(

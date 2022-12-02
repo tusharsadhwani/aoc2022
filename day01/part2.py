@@ -11,21 +11,46 @@ INPUT_TXT = os.path.join(os.path.dirname(__file__), 'input.txt')
 
 
 def compute(s: str) -> int:
-    numbers = support.parse_numbers_split(s)
-    for n in numbers:
-        pass
+    elf = 0
+    largest = 0
+    second_largest = 0
+    third_largest = 0
 
     lines = s.splitlines()
-    for line in lines:
-        pass
-    # TODO: implement solution here!
-    return 0
+    for line in lines + ['']:
+        if line == '':
+            if elf > largest:
+                largest, second_largest, third_largest = elf, largest, second_largest
+            elif elf > second_largest:
+                second_largest, third_largest = elf, second_largest
+            elif elf > third_largest:
+                third_largest = elf
+
+            elf = 0
+            continue
+    
+        elf += int(line)
+
+    return largest + second_largest + third_largest
 
 
 INPUT_S = '''\
+1000
+2000
+3000
 
+4000
+
+5000
+6000
+
+7000
+8000
+9000
+
+10000
 '''
-EXPECTED = 0
+EXPECTED = 45000
 
 
 @pytest.mark.parametrize(
